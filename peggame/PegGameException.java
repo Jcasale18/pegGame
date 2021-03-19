@@ -6,11 +6,11 @@ public class PegGameException extends Exception{
         super(errorMessage);
     }
     public PegGameException(){
-        this("Default Error Message");
+        this("Invalid Move");
     }
 
     /**
-     *
+     * Added by vscode
      */
     private static final long serialVersionUID = 1L;
 
