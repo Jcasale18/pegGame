@@ -5,16 +5,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameBoard implements PegGame{
-    private enum GameState {
-        NOT_STARTED,
-        IN_PROGRESS,
-        STALEMATE,
-        WON;
-    }
 
-    private static Map<Location, Boolean> board = new HashMap<>();
+    private static Map<Location, Boolean> board;
     
+    public GameBoard(int size){
+        board = new HashMap<>();
 
+
+        for(int row = 0; row < size; row++){
+            for(int col=0; col <size; col++){
+                Location location = new Location(row, col);
+                board.put(location, false);
+            }
+        }
+    }
+    public GameBoard(){
+        this(4);
+    }
     @Override
     public Collection<Move> getPossibleMoves() {
         // TODO Auto-generated method stub
@@ -22,7 +29,7 @@ public class GameBoard implements PegGame{
     }
 
     @Override
-    public Game getGameState() {
+    public GameState getGameState() {
         // TODO Auto-generated method stub
         return null;
     }
