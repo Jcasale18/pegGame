@@ -6,16 +6,16 @@ import java.util.Map;
 
 public class GameBoard implements PegGame{
 
-    private static Map<Location, Boolean> board;
+    private Map<Location, Boolean> board;
     
     public GameBoard(int size){
-        board = new HashMap<>();
+        this.board = new HashMap<>();
 
 
         for(int row = 0; row < size; row++){
             for(int col=0; col <size; col++){
                 Location location = new Location(row, col);
-                board.put(location, false);
+                this.board.put(location, false);
             }
         }
     }
@@ -36,7 +36,40 @@ public class GameBoard implements PegGame{
 
     @Override
     public void makeMove(Move move) throws PegGameException {
-        // TODO Auto-generated method stub
+        Location from = move.getFrom();
+        Location to = move.getTo();
+
+        Location middle = new Location((to.getRow() + from.getRow())/2 , (to.getCol() + from.getCol()) / 2);
+
+        if(!hasPeg(move.getFrom())){
+            throw new PegGameException("There is no peg to move");
+        }else if(hasPeg(move.getTo())){
+            throw new PegGameException("There is already a peg there");
+        }else if(!hasPeg(middle)){
+            throw new PegGameException("There is no peg to jump over");
+        }
+
+        else{
+            removePeg(move.getFrom());
+            addPeg(move.getTo());
+        }
         
+    }
+
+    public void addPeg(Location to){
+
+        if(board.containsKey(to)){
+            board.put(to, true);
+        }
+    }
+
+    public void removePeg(Location from){
+
+        if(board.containsKey(from)){
+            board.put(from, false);
+        }
+    }
+    public boolean hasPeg(Location location){
+        return board.get(location);
     }
 }
