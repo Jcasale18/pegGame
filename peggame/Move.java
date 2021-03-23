@@ -16,4 +16,5 @@ public class Move {
     public Location getTo() {
         return to;
     }
+
 }
