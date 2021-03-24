@@ -49,5 +49,10 @@ public class Location {
         }
         return null;
     }
+
+    @Override
+    public String toString(){
+        return this.row+", "+this.col;
+    }
     
 }
