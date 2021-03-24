@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\Quinn\\Documents\\CSEC124\\junit-platform-console-standalone-1.8.0-M1.jar"
+    ]
+}

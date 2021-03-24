@@ -3,6 +3,7 @@ package peggame;
 public class Move {
     private Location from;
     private Location to;
+
     public Move(Location from, Location to){
         this.from = from;
         this.to = to;

@@ -1,5 +1,6 @@
 package peggame;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,10 +8,11 @@ import java.util.Map;
 public class GameBoard implements PegGame{
 
     private Map<Location, Boolean> board;
+    private GameState state;
     
     public GameBoard(int size){
         this.board = new HashMap<>();
-
+        this.state = GameState.NOT_STARTED;
 
         for(int row = 0; row < size; row++){
             for(int col=0; col <size; col++){
@@ -30,8 +32,7 @@ public class GameBoard implements PegGame{
 
     @Override
     public GameState getGameState() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.state;
     }
 
     @Override
@@ -41,19 +42,35 @@ public class GameBoard implements PegGame{
 
         Location middle = new Location((to.getRow() + from.getRow())/2 , (to.getCol() + from.getCol()) / 2);
 
-        if(!hasPeg(move.getFrom())){
+        if(!board.containsKey(from) || !board.containsKey(to)){ //Checks if move is in board
+            throw new PegGameException("Invalid move");
+        }else if(!hasPeg(from)){
             throw new PegGameException("There is no peg to move");
-        }else if(hasPeg(move.getTo())){
+        }else if(hasPeg(to)){
             throw new PegGameException("There is already a peg there");
         }else if(!hasPeg(middle)){
             throw new PegGameException("There is no peg to jump over");
+        }else{
+            removePeg(from);
+            addPeg(to);
+            removePeg(middle);
         }
+    }
 
-        else{
-            removePeg(move.getFrom());
-            addPeg(move.getTo());
+    public Collection<Move> getMoves(Location location){
+        Collection<Move> moves = new ArrayList<>();
+        String[] commands = {"L","R", "B", "T", "TR", "TL", "BR", "BL"};
+        for (String command : commands){
+            try{
+                Location neighbor = location.getNeighbor(command);
+                if (board.get(neighbor) && !board.get(neighbor.getNeighbor(command))){
+                    moves.add(new Move(location, neighbor.getNeighbor(command)));
+                }
+            } catch (Exception e){
+                continue;
+            }
         }
-        
+        return moves;
     }
 
     public void addPeg(Location to){
@@ -72,4 +89,5 @@ public class GameBoard implements PegGame{
     public boolean hasPeg(Location location){
         return board.get(location);
     }
+    
 }
