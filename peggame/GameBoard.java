@@ -3,6 +3,7 @@ package peggame;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -95,9 +96,17 @@ public class GameBoard implements PegGame{
     @Override
     public String toString(){
         Set<Location> holes= board.keySet();
+        List<Location> holelist = new ArrayList<>();
+        for(Location hole: holes){
+            holelist.add(hole);
+        }
+        holelist.sort( (a,b) -> {
+            return a.hashCode() - b.hashCode();
+        });
+
         int index = 0;        
         String string = "";
-        for(Location hole: holes){
+        for(Location hole: holelist){
             if(board.get(hole) == true){
                 string += "{.}";
                 
