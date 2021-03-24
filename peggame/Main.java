@@ -16,6 +16,9 @@ public class Main {
 
         System.out.println(board);
 
+        System.out.println(board.getMoves(new Location(1, 0)));
+        System.out.println(board.getMoves(new Location(2, 0)));
+
     }
     
 }
