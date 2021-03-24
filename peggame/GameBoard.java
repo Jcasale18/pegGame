@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class GameBoard implements PegGame{
 
     private Map<Location, Boolean> board;
     private GameState state;
-    
+    private int size;
     public GameBoard(int size){
+        this.size = size;
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
 
@@ -90,4 +92,25 @@ public class GameBoard implements PegGame{
         return board.get(location);
     }
     
+    @Override
+    public String toString(){
+        Set<Location> holes= board.keySet();
+        int index = 0;        
+        String string = "";
+        for(Location hole: holes){
+            if(board.get(hole) == true){
+                string += "{.}";
+                
+            }
+            else{
+                string += "{o}";
+            }
+            index ++;
+            if(index % size == 0){
+
+                string += "\n";
+            }
+        }
+        return string;
+    }
 }
