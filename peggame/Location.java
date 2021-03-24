@@ -1,8 +1,5 @@
 package peggame;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Location {
     private int row;
     private int col;
