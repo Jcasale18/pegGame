@@ -100,16 +100,15 @@ public class GameBoard implements PegGame{
         for(Location hole: holes){
             holelist.add(hole);
         }
-        holelist.sort( (a,b) -> {
-            return a.hashCode() - b.hashCode();
-        });
+        holelist.sort( (a,b) -> (a.hashCode() - b.hashCode()));
+
 
         int index = 0;        
         String string = "";
         for(Location hole: holelist){
             if(board.get(hole) == true){
                 string += "{.}";
-                
+
             }
             else{
                 string += "{o}";
