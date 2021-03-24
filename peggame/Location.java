@@ -28,7 +28,26 @@ public class Location {
     }
     //Methods for retrieving neighbors
 
-    public Location getLeft(){
-        return new Location(row-1, col);
+    public Location getNeighbor(String dir){
+        dir = dir.toUpperCase();
+        if (dir.equals("L")){
+            return new Location(row, col-1);
+        } else if (dir.equals("R")){
+            return new Location(row, col+1);
+        }else if (dir.equals("T")){
+            return new Location(row+1, col);
+        }else if (dir.equals("B")){
+            return new Location(row-1, col);
+        }else if (dir.equals("TR")){
+            return new Location(row+1, col+1);
+        }else if (dir.equals("TL")){
+            return new Location(row+1, col-1);
+        }else if (dir.equals("BR")){
+            return new Location(row-1, col+1);
+        }else if (dir.equals("BL")){
+            return new Location(row-1, col-1);
+        }
+        return null;
     }
+    
 }
