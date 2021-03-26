@@ -28,11 +28,11 @@ public class Project1Main {
             System.out.println("\n" + board);
 
             System.out.print(">>");
-            s = scan.nextLine();
+            s = scan.nextLine().strip();
 
             if(s.equals("quit")){
                 System.out.print("Are you sure (y/n): ");
-                String sure = scan.nextLine();
+                String sure = scan.nextLine().strip();
                 if(sure.equals("n")){
                     continue;
                 }
