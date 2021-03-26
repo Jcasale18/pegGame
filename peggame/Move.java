@@ -21,6 +21,13 @@ public class Move {
     public String toString(){
         return "Move{"+from+"->"+to+"}";
     }
-
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Move){
+            Move other = (Move)o;
+            return other.getFrom().equals(from) && other.getTo().equals(to);
+        }
+        return false;
+    }
 }
 
