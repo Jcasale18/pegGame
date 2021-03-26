@@ -69,6 +69,10 @@ public class GameBoard implements PegGame{
             removePeg(middle);
         }
 
+        analyzeState();
+    }
+    public void analyzeState(){
+        
         if(numPegs >= 1){
             if(getPossibleMoves().size() == 0){
                 if(numPegs > 1){
@@ -79,7 +83,6 @@ public class GameBoard implements PegGame{
             }
         }
     }
-
     public Collection<Move> getMoves(Location location){
         Collection<Move> moves = new ArrayList<>();
         String[] commands = {"L","R", "B", "T", "TR", "TL", "BR", "BL"};
