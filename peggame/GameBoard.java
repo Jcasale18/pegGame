@@ -119,7 +119,7 @@ public class GameBoard implements PegGame{
                 string += "{o}";
             }
             index ++;
-            if(index % col == 0){
+            if(index % cols == 0){
 
                 string += "\n";
             }
