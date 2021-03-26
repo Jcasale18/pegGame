@@ -29,45 +29,33 @@ public class UserInput{
         ){
             String rowString = reader.readLine();
             int row = Integer.parseInt(rowString);
-            String colString = reader.readLine();
-            int col = colString.length();
+            String line = reader.readLine();
+            int col = line.length();
             board = new GameBoard(row, col);
 
-            int countRow = 1;
+            int countRow = 0;
             while (true){
-                String line = reader.readLine();
                 if (line == null){
                     break;
                 } else{
+                    System.out.println(line);
                     String[] pegs = line.split("");
-                    int countCol = 0;
-                    for (String peg : pegs){
-                        if (peg.equals(".")){
-                            board.addPeg(new Location(countRow, countCol));
+                    for (int i=0; i<pegs.length; i++){
+                        if(pegs[i].equals(".")){
+                            board.addPeg(new Location (countRow, i));
                         }
-                        countCol += 1;
                     }
                 }
+                line = reader.readLine();
+                countRow += 1;
             }
-
-
-
-            ///////////////////////////////////////////////
-            //place logic for creating board here://///////
-            ///////////////////////////////////////////////
 
 
         }catch(IOException e){
             System.out.println("Bad Filename");
-           //return ""; //errorcode
-           //return null;
         }
         board.updateGameState(GameState.IN_PROGRESS);
         this.board = board;
-
-        //return board;
-        //return board.toString();
-
     }
     public boolean interpretCommand(String s){
         String[] multiple = s.split(" ");
