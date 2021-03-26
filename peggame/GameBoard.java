@@ -11,11 +11,9 @@ public class GameBoard implements PegGame{
 
     private Map<Location, Boolean> board;
     private GameState state;
-    private int rows;
     private int cols;
     private int numPegs;
     public GameBoard(int rows, int cols){
-        this.rows = rows;
         this.cols = cols;
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
