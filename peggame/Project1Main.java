@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class Project1Main {
     
  
+    /**
+     * Main Loop
+     * @param args args from command line(no functionality)
+     */
     public static void main(String[] args) {
         String s = new String("");
 
