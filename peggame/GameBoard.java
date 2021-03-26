@@ -39,6 +39,11 @@ public class GameBoard implements PegGame{
     public GameBoard(){
         this(4, 4);
     }
+
+    public Map<Location, Boolean> getBoard() {
+        return board;
+    }
+    
     @Override
     /**
      * Find all moves on a board.
@@ -83,15 +88,15 @@ public class GameBoard implements PegGame{
     }
     public void analyzeState(){
         
-        if(numPegs >= 1){
+        if(numPegs >= 1){//if theres at least one peg, the game might still be running
             if(getPossibleMoves().size() == 0){
                 if(numPegs > 1){
-                    state = GameState.STALEMATE;
+                    state = GameState.STALEMATE;//if there's no moves, and more than one peg, it's stalemate
                 }else{
                     state = GameState.WON;
                 }
             }else{
-                state = GameState.IN_PROGRESS;
+                state = GameState.IN_PROGRESS;//if there's still moves to make, the game is still in progress
             }
         }
     }
@@ -186,6 +191,13 @@ public class GameBoard implements PegGame{
      */
     public void updateGameState(GameState state){
         this.state = state;
+    }
+
+
+    @Override
+    public PegGame deepCopy(PegGame original) {
+        original.
+        return null;
     }
     
 }

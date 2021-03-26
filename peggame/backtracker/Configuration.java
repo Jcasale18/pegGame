@@ -1,4 +1,4 @@
-package backtracker;
+package peggame.backtracker;
 
 import java.util.Collection;
 
