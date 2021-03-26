@@ -7,12 +7,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Class represents a game of Peg Game
+ */
 public class GameBoard implements PegGame{
 
-    private Map<Location, Boolean> board;
+    private Map<Location, Boolean> board;//Map of all locations in board {Location, HasPeg?}
     private GameState state;
     private int cols;
     private int numPegs;
+    /**
+     * Generates a rows x cols sized PegGame board with no pegs in it
+     * @param rows num of rows
+     * @param cols num of cols
+     */
     public GameBoard(int rows, int cols){
         this.cols = cols;
         this.board = new HashMap<>();
@@ -32,6 +40,10 @@ public class GameBoard implements PegGame{
         this(4, 4);
     }
     @Override
+    /**
+     * Find all moves on a board.
+     * @return  a collection of all possible moves on a board.
+     */
     public Collection<Move> getPossibleMoves() {
         Set<Location> locs = board.keySet();
         Collection<Move> possibleMoves = new ArrayList<>();
@@ -83,6 +95,11 @@ public class GameBoard implements PegGame{
             }
         }
     }
+    /**
+     * Get possible moves that can be made at a given location
+     * @param location location of type Location
+     * @return returns a Collection of locations.
+     */
     public Collection<Move> getMoves(Location location){
         Collection<Move> moves = new ArrayList<>();
         String[] commands = {"L","R", "B", "T", "TR", "TL", "BR", "BL"};
@@ -100,6 +117,10 @@ public class GameBoard implements PegGame{
         return moves;
     }
 
+    /**
+     * Adds a peg to a location, if there is not one already
+     * @param to Location type
+     */
     public void addPeg(Location to){
 
         if(board.containsKey(to)){
@@ -110,6 +131,10 @@ public class GameBoard implements PegGame{
         }
     }
 
+    /**
+     * Removes a peg from a location, if one is there
+     * @param from location to remove from, type Location
+     */
     public void removePeg(Location from){
 
         if(board.containsKey(from)){
@@ -119,6 +144,11 @@ public class GameBoard implements PegGame{
             }
         }
     }
+    /**
+     * Checks for peg in a location
+     * @param location Location to check
+     * @return returns true if has a peg, otherwise false.
+     */
     public boolean hasPeg(Location location){
         return board.get(location);
     }
@@ -150,6 +180,10 @@ public class GameBoard implements PegGame{
         }
         return string;
     }
+    /**
+     * Setter for gamestate
+     * @param state GameState enum type.
+     */
     public void updateGameState(GameState state){
         this.state = state;
     }
