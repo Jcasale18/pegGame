@@ -1,4 +1,4 @@
-package backtracker;
+package peggame.backtracker;
 
 /**
  * This class represents the classic recursive backtracking algorithm.
