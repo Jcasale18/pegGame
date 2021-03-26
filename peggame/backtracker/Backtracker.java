@@ -66,7 +66,7 @@ public class Backtracker {
                 }
             }
             // implicit backtracking happens here
-        } 
+        }
         return null;
     }
 }

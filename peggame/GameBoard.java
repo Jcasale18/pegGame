@@ -51,17 +51,27 @@ public class GameBoard implements PegGame{
     public int getRows(){
         return rows;
     }
+
+    @Override
+    public int getNumPegs() {
+        return this.numPegs;
+    }
+
     @Override
     /**
      * Find all moves on a board.
      * @return  a collection of all possible moves on a board.
      */
     public Collection<Move> getPossibleMoves() {
+        
         Set<Location> locs = board.keySet();
         Collection<Move> possibleMoves = new ArrayList<>();
         for (Location loc : locs){
-            possibleMoves.addAll(getMoves(loc));
+            if (board.get(loc)){
+                possibleMoves.addAll(getMoves(loc));
+            }
         }
+        
         return possibleMoves;
     }
 
@@ -153,6 +163,7 @@ public class GameBoard implements PegGame{
             if(board.get(from) == true){
                 board.put(from, false);
                 numPegs--;
+                //System.out.println(numPegs);
             }
         }
     }
@@ -203,8 +214,11 @@ public class GameBoard implements PegGame{
 
     @Override
     public PegGame deepCopy() {
+        
         GameBoard copy = new GameBoard(rows, cols);
         this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));
+        copy.numPegs = this.numPegs;
+        
         return copy;
     }
 
