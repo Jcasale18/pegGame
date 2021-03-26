@@ -43,7 +43,16 @@ public class GameBoard_test {
 
         //analyze
         assert(moves.size() == 1);
-        assert(moves.contains(new Move(new Location(0,0), new Location(2, 0))));//should be only possible move
+        assert(moves.contains(new Move(new Location(0,0), new Location(2, 0))));//should be only possible move\
+
+        GameBoard biggerboard= new GameBoard(4, 3);
+        biggerboard.addPeg(new Location(1,1));
+        biggerboard.addPeg(new Location(2,1));
+        Collection<Move> movesnew = biggerboard.getPossibleMoves();
+        assert(movesnew.size() == 2);
+        assert(movesnew.contains(new Move(new Location(1, 1), new Location(3, 1))));
+        assert(movesnew.contains(new Move(new Location(2,1), new Location(0, 1))));
+
     }
     @Test
     public void test_getMoves(){
