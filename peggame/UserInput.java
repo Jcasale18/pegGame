@@ -48,6 +48,7 @@ public class UserInput{
                 }
                 line = reader.readLine();
                 countRow += 1;
+                board.analyzeState();
             }
 
 
