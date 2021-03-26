@@ -11,21 +11,23 @@ public class GameBoard implements PegGame{
 
     private Map<Location, Boolean> board;
     private GameState state;
-    private int size;
-    public GameBoard(int size){
-        this.size = size;
+    private int row;
+    private int col;
+    public GameBoard(int row, int col){
+        this.row = row;
+        this.col = col;
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
 
-        for(int row = 0; row < size; row++){
-            for(int col=0; col <size; col++){
+        for(int rowS = 0; rowS < row; row++){
+            for(int colS=0; colS <col; col++){
                 Location location = new Location(row, col);
                 this.board.put(location, false);
             }
         }
     }
     public GameBoard(){
-        this(4);
+        this(4, 4);
     }
     @Override
     public Collection<Move> getPossibleMoves() {
@@ -117,7 +119,7 @@ public class GameBoard implements PegGame{
                 string += "{o}";
             }
             index ++;
-            if(index % size == 0){
+            if(index % col == 0){
 
                 string += "\n";
             }
