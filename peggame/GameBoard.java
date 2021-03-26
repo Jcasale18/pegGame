@@ -137,10 +137,10 @@ public class GameBoard implements PegGame{
         String string = "";
         for(Location hole: holelist){
             if(board.get(hole) == true){
-                string += "{.}";
+                string += "o";
             }
             else{
-                string += "{o}";
+                string += "-";
             }
             index ++;
             if(index % cols == 0){

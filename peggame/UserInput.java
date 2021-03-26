@@ -38,10 +38,9 @@ public class UserInput{
                 if (line == null){
                     break;
                 } else{
-                    System.out.println(line);
                     String[] pegs = line.split("");
                     for (int i=0; i<pegs.length; i++){
-                        if(pegs[i].equals(".")){
+                        if(pegs[i].equals("o")){
                             board.addPeg(new Location (countRow, i));
                         }
                     }
