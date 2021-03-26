@@ -7,15 +7,16 @@ import peggame.backtracker.Backtracker;
 import peggame.backtracker.Configuration;
 public class PeggameSolver implements Configuration{
     private PegGame board;
+    private Collection<Move> moves;
         public PeggameSolver(PegGame board){
         this.board = board;
+        this.moves = board.getPossibleMoves();
     }
     @Override
     public Collection<Configuration> getSuccessors() {
         Collection<Configuration> successors = new ArrayList<>();
 
-        Collection<Move> possibleMoves = board.getPossibleMoves();
-        for(Move move : possibleMoves){
+        for(Move move : moves){
             PegGame copy = board.deepCopy();
             try{
                 copy.makeMove(move);
@@ -31,14 +32,12 @@ public class PeggameSolver implements Configuration{
 
     @Override
     public boolean isValid() {
-        // TODO Auto-generated method stub
-        return false;
+        return (moves.size() > 0);
     }
 
     @Override
     public boolean isGoal() {
-        // TODO Auto-generated method stub
-        return false;
+        return (board.getGameState().equals(GameState.WON));
     }
     
 }
