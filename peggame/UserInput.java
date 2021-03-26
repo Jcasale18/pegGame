@@ -8,17 +8,39 @@ import java.util.Iterator;
 
 
 public class UserInput{
+    /**
+     * Constructor for extant board
+     */
     private GameBoard board;
     public UserInput(GameBoard board){
         this.board = board;//the board for the userinput class to manipulate
     }
+
+    /**
+     * Constructor to create class without board
+     * (Mainly used for when reading board from file)
+     */
     public UserInput(){
-        
+    
     }
+
+    /**
+     * Getter for userinput board
+     * @return Returns the userinput gameboard
+     */
     public GameBoard getBoard() {
         return board;
     }
 
+
+    /**
+     * Sets the board to the board found in a text document
+     * Gets the number of rows from the first line of document
+     * Gets the number of colums from the length of the second line
+     * Creates a new board, which is defaultly empty
+     * Fills any location with a o in the text document with a peg
+     * @param filename File location of text version of game board
+     */
     public void initiateboard(String filename){
         //use the filename to add pegs to the board corresponding to file contents.
         //maybe return a tostring of the new board.(good for testing/debugging etc)
@@ -58,6 +80,12 @@ public class UserInput{
         board.analyzeState();
 
     }
+
+    /**
+     * Simple method for intrepreting different commands
+     * @param s Provided command
+     * @return Boolean used for quitting
+     */
     public boolean interpretCommand(String s){
         String[] multiple = s.split(" ");
     
@@ -95,6 +123,10 @@ public class UserInput{
         }
         return true;
     }
+
+    /**
+     * Help command - Prints out all possible commands, how to use them and what they do
+     */
     public static void printCommands(){
         System.out.println("Available Commands: ");
         System.out.println("help - displays this message");
