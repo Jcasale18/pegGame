@@ -17,8 +17,6 @@ public class Move {
         return to;
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public String toString(){
         return "Move{"+from+"->"+to+"}";
@@ -31,6 +29,5 @@ public class Move {
         }
         return false;
     }
->>>>>>> 1e76e4f9d010df3319785b1603fef5f00f6060c3
 }
 
