@@ -48,7 +48,6 @@ public class UserInput{
                 }
                 line = reader.readLine();
                 countRow += 1;
-                board.analyzeState();
             }
 
 
@@ -57,6 +56,8 @@ public class UserInput{
         }
         board.updateGameState(GameState.IN_PROGRESS);
         this.board = board;
+        board.analyzeState();
+
     }
     public boolean interpretCommand(String s){
         String[] multiple = s.split(" ");
