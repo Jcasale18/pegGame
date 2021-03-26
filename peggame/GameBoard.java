@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 public class GameBoard implements PegGame{
@@ -30,8 +29,12 @@ public class GameBoard implements PegGame{
     }
     @Override
     public Collection<Move> getPossibleMoves() {
-        // TODO Auto-generated method stub
-        return null;
+        Set<Location> locs = board.keySet();
+        Collection<Move> possibleMoves = new ArrayList<>();
+        for (Location loc : locs){
+            possibleMoves.addAll(getMoves(loc));
+        }
+        return possibleMoves;
     }
 
     @Override
@@ -120,6 +123,9 @@ public class GameBoard implements PegGame{
             }
         }
         return string;
+    }
+    public void updateGameState(GameState state){
+        this.state = state;
     }
     
     
