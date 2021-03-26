@@ -3,6 +3,8 @@ package peggame;
 public class Main {
     GameBoard board = new GameBoard(6);
     
+
+ 
     public static void main(String[] args) {
         GameBoard board = new GameBoard(6);
         System.out.println(board);
