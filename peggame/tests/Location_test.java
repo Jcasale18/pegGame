@@ -10,14 +10,14 @@ import peggame.Location;
 public class Location_test {
 
     @Test
-    public void location_test_0(){
+    public void location_test_getters(){
         Location loc = new Location(3,4);
         assertEquals(loc.getRow(), 3);
         assertEquals(loc.getCol(), 4);
     }
 
     @Test
-    public void location_test_1(){
+    public void location_test_equals(){
         Location loc1 = new Location(3,3);
         Location loc2 = new Location(3,3);
         Location loc3 = new Location(3,4);
@@ -26,19 +26,19 @@ public class Location_test {
     }
 
     @Test
-    public void location_test_2(){
+    public void location_test_toString(){
         Location loc1 = new Location(3, 3);
         assertEquals(loc1.toString(), "(3, 3)");
     }
 
     @Test
-    public void location_test_3(){
+    public void location_test_hashCode(){
         Location loc1 = new Location(3,3);
         assertEquals(loc1.hashCode(), 30003);
     }
 
     @Test
-    public void location_test_4(){
+    public void location_test_getNeighbor(){
         Location loc1 = new Location(3,3);
         assertEquals(loc1.getNeighbor("L"), new Location(3, 2));
         assertEquals(loc1.getNeighbor("R"), new Location(3, 4));
