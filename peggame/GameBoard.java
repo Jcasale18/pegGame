@@ -76,10 +76,12 @@ public class GameBoard implements PegGame{
         if(numPegs >= 1){
             if(getPossibleMoves().size() == 0){
                 if(numPegs > 1){
-                state = GameState.STALEMATE;
+                    state = GameState.STALEMATE;
                 }else{
                     state = GameState.WON;
                 }
+            }else{
+                state = GameState.IN_PROGRESS;
             }
         }
     }

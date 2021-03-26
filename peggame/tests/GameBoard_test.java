@@ -9,6 +9,7 @@ import peggame.GameBoard;
 import peggame.GameState;
 import peggame.Location;
 import peggame.Move;
+import peggame.PegGameException;
 
 @Testable
 public class GameBoard_test {
@@ -68,14 +69,39 @@ public class GameBoard_test {
         assert(moves.size() == 1);
         assert(moves.contains(new Move(new Location(0,0), new Location(2, 0))));//should be only possible move
     }
+    @Test
     public void test_removePeg(){
         GameBoard board = new GameBoard(2,2);
         board.addPeg(new Location(0, 0));
         board.addPeg(new Location(1, 1));
-        assert("o-\no-\n".equals(board.toString()));
+        assert("o-\n-o\n".equals(board.toString()));
         board.removePeg(new Location(1, 1));
         assert("o-\n--\n".equals(board.toString()));
 
         assert(board.getPossibleMoves().size() == 0);
     }
+    @Test
+    public void test_analyze_state(){
+        GameBoard board = new GameBoard(3, 3);
+        assert(board.getGameState() == GameState.NOT_STARTED);
+
+        board.addPeg(new Location(0, 0));
+        board.addPeg(new Location(1, 0));
+        
+        board.analyzeState();
+        assert(board.getGameState() == GameState.IN_PROGRESS);
+
+        board.addPeg(new Location(2, 0));
+        board.analyzeState();
+        assert(board.getGameState() == GameState.STALEMATE);
+
+        board.removePeg(new Location(2, 0));
+        try{
+            board.makeMove(new Move(new Location(0, 0), new Location(2, 0)));
+        }catch(PegGameException e){
+            assert(false);
+        }
+        board.analyzeState();
+        assert(board.getGameState() == GameState.WON);
+        }
 }
