@@ -1,9 +1,10 @@
 package peggame;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Project1Main {
-    GameBoard board = new GameBoard(6);
     
     public static void printCommands(){
         System.out.println("Available Commands: ");
@@ -17,27 +18,24 @@ public class Project1Main {
         String s = new String("");
 
         Scanner scan = new Scanner( System.in);
-        GameBoard board = new GameBoard(3);//create initial empty board
-        UserInput inputparser = new UserInput(board);
+        UserInput inputparser = new UserInput();
 
         System.out.println("Enter FileName: ");
         String filename = scan.nextLine();
         
         inputparser.initiateboard(filename);//inputparser contains the board, knows to manipulate that board
-
-
+        GameBoard board = inputparser.getBoard();
         
         while (board.getGameState() == GameState.IN_PROGRESS){
-
-
+            System.out.println(board);
+            System.out.print(">>");
             s = scan.nextLine();
-            s.toLowerCase();
             String[] multiple = s.split(" ");
     
-            if(s == "help"){
+            if(s.equals("help")){
                 printCommands();
             }
-            else if (multiple[0] == "move"){
+            else if (multiple[0].equals("move")){
                 int r1 = Integer.parseInt(multiple[1]);
                 int c1 = Integer.parseInt(multiple[2]);
                 int r2 = Integer.parseInt(multiple[3]);
@@ -47,22 +45,32 @@ public class Project1Main {
 
                 Move move = new Move(from, to);
                 
-                makeMove(move);
-               
-               
-            }
-            else if(s == "hint"){
-                getPossibleMoves();
+                try{
+                    board.makeMove(move);
 
+                }catch(PegGameException e){
+                    System.out.println(e);
+                    continue;
+                }
+               
+               
             }
-            else if(s == "quit"){
+            else if(s.equals("hint")){
+                Collection<Move> moves = board.getPossibleMoves();
+                Iterator<Move> options = moves.iterator();
+                System.out.println(options.next());
+            }
+            else if(s.equals("quit")){
                 System.out.println("quitting the program...");
-                state = GameState.NOT_STARTED;
+                board.updateGameState(GameState.NOT_STARTED);
             }
             
         } 
+        
         scan.close();
         
     }
+
+
     
 }

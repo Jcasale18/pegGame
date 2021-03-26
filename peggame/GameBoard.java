@@ -128,9 +128,4 @@ public class GameBoard implements PegGame{
         this.state = state;
     }
     
-    
-
-     
-
-
 }
