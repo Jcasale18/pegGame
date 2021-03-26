@@ -11,17 +11,17 @@ public class GameBoard implements PegGame{
 
     private Map<Location, Boolean> board;
     private GameState state;
-    private int row;
-    private int col;
-    public GameBoard(int row, int col){
-        this.row = row;
-        this.col = col;
+    private int rows;
+    private int cols;
+    public GameBoard(int rows, int cols){
+        this.rows = rows;
+        this.cols = cols;
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
 
-        for(int rowS = 0; rowS < row; row++){
-            for(int colS=0; colS <col; col++){
-                Location location = new Location(row, col);
+        for(int rowS = 0; rowS < rows; rowS++){
+            for(int colS=0; colS <cols; colS++){
+                Location location = new Location(rowS, colS);
                 this.board.put(location, false);
             }
         }
