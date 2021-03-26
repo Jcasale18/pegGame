@@ -19,13 +19,15 @@ public class GameBoard implements PegGame{
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
 
-        for(int rowS = 0; rowS < rows; rowS++){
-            for(int colS=0; colS <cols; colS++){
-                Location location = new Location(rowS, colS);
+        for(int r = 0; r < rows; r++){
+            for(int c=0; c <cols; c++){
+                Location location = new Location(r, c);
                 this.board.put(location, false);
             }
         }
     }
+
+
     public GameBoard(){
         this(4, 4);
     }
