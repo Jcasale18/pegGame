@@ -26,6 +26,4 @@ public interface PegGame {
      * @return returns a copy that is separate from original
      */
     PegGame deepCopy();
-
-    int getNumPegs();
 }
