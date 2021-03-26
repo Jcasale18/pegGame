@@ -17,5 +17,20 @@ public class Move {
         return to;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public String toString(){
+        return "Move{"+from+"->"+to+"}";
+    }
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Move){
+            Move other = (Move)o;
+            return other.getFrom().equals(from) && other.getTo().equals(to);
+        }
+        return false;
+    }
+>>>>>>> 1e76e4f9d010df3319785b1603fef5f00f6060c3
 }
 

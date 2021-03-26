@@ -1,50 +1,49 @@
 package peggame;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class UserInput{
-
-
-
-    public void userInput(GameState state){
-        String s = new String("");
-
-        Scanner scan = new Scanner( System.in);
-        
-        while (state == GameState.IN_PROGRESS){
-            s = scan.nextLine();
-            s.toLowerCase();
-            String[] multiple = s.split(" ");
-    
-            if(s == "help"){
-                System.out.println("Commands include:\n move r1 c1 r2 c2: provide a start position and end position of a peg to move it \n hint: displays an available move \n quit: quits program ");
-
-            }
-            else if (multiple[0] == "move"){
-                int r1 = Integer.parseInt(multiple[1]);
-                int c1 = Integer.parseInt(multiple[2]);
-                int r2 = Integer.parseInt(multiple[3]);
-                int c2 = Integer.parseInt(multiple[4]);
-                Location from = new Location(r1, c1);
-                Location to = new Location(r2, c2);
-
-                Move move = new Move(from, to);
-                
-                makeMove(move);
-               
-               
-            }
-            else if(s == "hint"){
-                getPossibleMoves();
-
-            }
-            else if(s == "quit"){
-                System.out.println("quitting the program...");
-                state = GameState.NOT_STARTED;
-            }
-            
-        } 
-        scan.close();
+    private GameBoard board;
+    public UserInput(GameBoard board){
+        this.board = board;//the board for the userinput class to manipulate
+    }
+    public UserInput(){
         
     }
+    public GameBoard getBoard() {
+        return board;
+    }
+
+    public String initiateboard(String filename){
+        //use the filename to add pegs to the board corresponding to file contents.
+        //maybe return a tostring of the new board.(good for testing/debugging etc)
+        try(
+            FileReader file = new FileReader(filename);
+            BufferedReader reader = new BufferedReader(file);
+        ){
+            String size = reader.readLine();
+            int dimension = Integer.parseInt(size);
+            this.board = new GameBoard(dimension);
+
+
+            ///////////////////////////////////////////////
+            //place logic for creating board here://///////
+            ///////////////////////////////////////////////
+
+
+        }catch(IOException e){
+            System.out.println("Bad Filename");
+            return ""; //errorcode
+        }
+        board.updateGameState(GameState.IN_PROGRESS);
+
+        return board.toString();
+
+
+    }
+    public void interpretCommand(String command){
+        //logic for playing the game
+    } 
 }
