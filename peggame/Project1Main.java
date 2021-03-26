@@ -25,7 +25,17 @@ public class Project1Main {
 
             System.out.print(">>");
             s = scan.nextLine();
+
+            if(s.equals("quit")){
+                System.out.print("Are you sure (y/n): ");
+                String sure = scan.nextLine();
+                if(sure.equals("n")){
+                    continue;
+                }
+            }
             boolean success = inputparser.interpretCommand(s);
+
+
             if(!success){
                 break;
             }
