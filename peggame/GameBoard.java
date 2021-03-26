@@ -14,6 +14,7 @@ public class GameBoard implements PegGame{
 
     private Map<Location, Boolean> board;//Map of all locations in board {Location, HasPeg?}
     private GameState state;
+    private int rows;
     private int cols;
     private int numPegs;
     /**
@@ -22,6 +23,7 @@ public class GameBoard implements PegGame{
      * @param cols num of cols
      */
     public GameBoard(int rows, int cols){
+        this.rows = rows;
         this.cols = cols;
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
@@ -43,7 +45,12 @@ public class GameBoard implements PegGame{
     public Map<Location, Boolean> getBoard() {
         return board;
     }
-    
+    public int getCols() {
+        return cols;
+    }
+    public int getRows(){
+        return rows;
+    }
     @Override
     /**
      * Find all moves on a board.
@@ -195,9 +202,11 @@ public class GameBoard implements PegGame{
 
 
     @Override
-    public PegGame deepCopy(PegGame original) {
-        original.
-        return null;
+    public PegGame deepCopy() {
+        GameBoard copy = new GameBoard(rows, cols);
+        this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));
+        return copy;
     }
+
     
 }

@@ -25,5 +25,5 @@ public interface PegGame {
      * @param original original board
      * @return returns a copy that is separate from original
      */
-    PegGame deepCopy(PegGame original);
+    PegGame deepCopy();
 }
