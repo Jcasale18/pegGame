@@ -3,6 +3,11 @@ package peggame;
 public class Location {
     private int row;
     private int col;
+    /**
+     * Represents a location on the board
+     * @param row row
+     * @param col col
+     */
     public Location(int row, int col){
         this.row = row;
         this.col = col;

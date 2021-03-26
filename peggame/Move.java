@@ -4,6 +4,11 @@ public class Move {
     private Location from;
     private Location to;
 
+    /**
+     * Represents a Move from from location to another
+     * @param from Location to move from type Location
+     * @param to Location to move to type Location
+     */
     public Move(Location from, Location to){
         this.from = from;
         this.to = to;
