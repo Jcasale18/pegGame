@@ -16,6 +16,12 @@ public class Main {
 
         System.out.println(board);
 
+        board.removePeg(new Location(2,0));
+        System.out.println(board);
+
+        board.removePeg(new Location(5,5));
+        System.out.println(board);
+
     }
     
 }
