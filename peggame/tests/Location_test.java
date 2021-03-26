@@ -28,7 +28,7 @@ public class Location_test {
     @Test
     public void location_test_2(){
         Location loc1 = new Location(3, 3);
-        assertEquals(loc1.toString(), "3, 3");
+        assertEquals(loc1.toString(), "(3, 3)");
     }
 
     @Test

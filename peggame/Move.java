@@ -19,7 +19,7 @@ public class Move {
 
     @Override
     public String toString(){
-        return "Move{"+from+"->"+to+"}";
+        return "Move from "+from+" to " +to;
     }
     @Override
     public boolean equals(Object o){
