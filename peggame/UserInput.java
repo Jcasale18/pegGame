@@ -78,7 +78,6 @@ public class UserInput{
 
             }catch(PegGameException e){
                 System.out.println(e);
-                return false;
             }
            
            
@@ -91,6 +90,7 @@ public class UserInput{
         else if(s.equals("quit")){
             System.out.println("quitting the program...");
             board.updateGameState(GameState.NOT_STARTED);
+            return false;
         }
         return true;
     }

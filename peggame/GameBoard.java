@@ -13,11 +13,13 @@ public class GameBoard implements PegGame{
     private GameState state;
     private int rows;
     private int cols;
+    private int numPegs;
     public GameBoard(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
+        this.numPegs = 0;
 
         for(int r = 0; r < rows; r++){
             for(int c=0; c <cols; c++){
@@ -66,6 +68,16 @@ public class GameBoard implements PegGame{
             addPeg(to);
             removePeg(middle);
         }
+
+        if(numPegs >= 1){
+            if(getPossibleMoves().size() == 0){
+                if(numPegs > 1){
+                state = GameState.STALEMATE;
+                }else{
+                    state = GameState.WON;
+                }
+            }
+        }
     }
 
     public Collection<Move> getMoves(Location location){
@@ -74,7 +86,8 @@ public class GameBoard implements PegGame{
         for (String command : commands){
             try{
                 Location neighbor = location.getNeighbor(command);
-                if (board.get(neighbor) && !board.get(neighbor.getNeighbor(command))){
+                if (board.get(location) && board.get(neighbor) && !board.get(neighbor.getNeighbor(command))){
+
                     moves.add(new Move(location, neighbor.getNeighbor(command)));
                 }
             } catch (Exception e){
@@ -87,14 +100,20 @@ public class GameBoard implements PegGame{
     public void addPeg(Location to){
 
         if(board.containsKey(to)){
-            board.put(to, true);
+            if(board.get(to) == false){
+                board.put(to, true);
+                numPegs++;
+            }
         }
     }
 
     public void removePeg(Location from){
 
         if(board.containsKey(from)){
-            board.put(from, false);
+            if(board.get(from) == true){
+                board.put(from, false);
+                numPegs--;
+            }
         }
     }
     public boolean hasPeg(Location location){

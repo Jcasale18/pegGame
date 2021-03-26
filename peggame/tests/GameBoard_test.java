@@ -1,9 +1,14 @@
-package peggame;
+package peggame.tests;
 
 import java.util.Collection;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
+
+import peggame.GameBoard;
+import peggame.GameState;
+import peggame.Location;
+import peggame.Move;
 
 @Testable
 public class GameBoard_test {
