@@ -50,6 +50,7 @@ public class Project1Main {
                 break;
             }else if(board.getGameState() == GameState.WON){//checks if user has won game, quits if true
                 System.out.println("Winner Winner!");
+                System.out.println(board);
                 System.out.println("Goodbye!");
                 break;
             }
