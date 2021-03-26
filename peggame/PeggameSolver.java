@@ -8,9 +8,12 @@ import peggame.backtracker.Configuration;
 public class PeggameSolver implements Configuration{
     private PegGame board;
     private Collection<Move> moves;
-        public PeggameSolver(PegGame board){
+    public PeggameSolver(PegGame board){
         this.board = board;
         this.moves = board.getPossibleMoves();
+    }
+    public PegGame getBoard() {
+        return board;
     }
     @Override
     public Collection<Configuration> getSuccessors() {
@@ -38,6 +41,22 @@ public class PeggameSolver implements Configuration{
     @Override
     public boolean isGoal() {
         return (board.getGameState().equals(GameState.WON));
+    }
+    @Override
+    public String toString(){
+        return board.toString();
+    }
+    public static void main(String[] args) {
+        Backtracker solver = new Backtracker(false);
+        UserInput u = new UserInput();
+        u.initiateboard("data/4_4.txt");
+        Configuration config = new PeggameSolver(u.getBoard());
+        Configuration solution = solver.solve(config);
+        if(solution == null){
+            System.out.println("No solution");
+        }else{
+            System.out.println(solution);
+        }
     }
     
 }
