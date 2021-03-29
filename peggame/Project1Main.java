@@ -38,6 +38,7 @@ public class Project1Main {
                 }
             }
             boolean success = inputparser.interpretCommand(s);
+            board.analyzeState();
 
 
             if(!success){

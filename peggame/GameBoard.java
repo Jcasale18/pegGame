@@ -105,8 +105,6 @@ public class GameBoard implements PegGame{
             removePeg(middle);
             solvingMoves.add(move);
         }
-
-        analyzeState();
     }
     public void analyzeState(){
         

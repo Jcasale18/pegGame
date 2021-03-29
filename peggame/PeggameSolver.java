@@ -50,7 +50,7 @@ public class PeggameSolver implements Configuration{
     }
     @Override
     public boolean isGoal() {
-        return (board.getGameState().equals(GameState.WON));
+        return (board.getNumPegs() == 1);
     }
 
     @Override
