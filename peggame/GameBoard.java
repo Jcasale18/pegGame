@@ -82,6 +82,7 @@ public class GameBoard implements PegGame{
 
     @Override
     public void makeMove(Move move) throws PegGameException {
+        Collection<Move> moves = new ArrayList<>();
         Location from = move.getFrom();
         Location to = move.getTo();
 
@@ -99,9 +100,11 @@ public class GameBoard implements PegGame{
             removePeg(from);
             addPeg(to);
             removePeg(middle);
+            moves.add(new Move(from, to));
         }
 
         analyzeState();
+        System.out.println(moves);
     }
     public void analyzeState(){
         
