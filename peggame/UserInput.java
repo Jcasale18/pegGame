@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 
+import peggame.backtracker.Backtracker;
+import peggame.backtracker.Configuration;
+
 
 public class UserInput{
     /**
@@ -112,9 +115,19 @@ public class UserInput{
            
         }
         else if(s.equals("hint")){
-            Collection<Move> moves = board.getPossibleMoves();
-            Iterator<Move> options = moves.iterator();
-            System.out.println(options.next());
+            GameBoard copy = new GameBoard(board.getRows(), board.getCols());
+            board.getBoard().forEach((loc, bool) -> copy.getBoard().put(loc,bool));
+            copy.setNumPegs(board.getNumPegs());//manually making a copy without copying moves
+
+            Backtracker bt = new Backtracker(false);
+            Configuration sol = bt.solve(new PeggameSolver(copy));
+            if(sol == null){
+                System.out.println("There is no way for you solve this board.");
+                return true;
+            }
+            Collection<Move> solvingmoves = sol.getsolution();
+            Iterator<Move> solmoves = solvingmoves.iterator();
+            System.out.println(solmoves.next());
         }
         else if(s.equals("quit")){
             System.out.println("quitting the program...");

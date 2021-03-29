@@ -43,6 +43,13 @@ public class GameBoard implements PegGame{
         this(4, 4);
     }
 
+    /**
+     * sets number of pegs. Careful to use, will ruin game.
+     * @param num
+     */
+    public void setNumPegs(int num){
+        this.numPegs = num;
+    }
     public Map<Location, Boolean> getBoard() {
         return board;
     }
