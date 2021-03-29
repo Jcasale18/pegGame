@@ -122,7 +122,7 @@ public class UserInput{
             Backtracker bt = new Backtracker(false);
             Configuration sol = bt.solve(new PeggameSolver(copy));
             if(sol == null){
-                System.out.println("There is no way for you solve this board.");
+                System.out.println("This game is unwinnable. Have a nice day.");
                 return true;
             }
             Collection<Move> solvingmoves = sol.getsolution();
@@ -134,6 +134,31 @@ public class UserInput{
             board.updateGameState(GameState.NOT_STARTED);
             return false;
         }
+        else if(s.equals("solve")){
+            GameBoard copy = new GameBoard(board.getRows(), board.getCols());
+
+            board.getBoard().forEach((loc, bool) -> copy.getBoard().put(loc,bool));
+            copy.setNumPegs(board.getNumPegs());//manually making a copy without copying moves
+
+            Backtracker bt = new Backtracker(false);
+            Configuration sol = bt.solve(new PeggameSolver(copy));
+            if(sol == null){
+                System.out.println("There is no way for you solve this board.");
+                return true;
+            }
+            Collection<Move> solvingmoves = sol.getsolution();
+            for(Move move : solvingmoves){
+                try{
+                    System.out.println(move);
+                    board.makeMove(move);
+                    if(board.getNumPegs() > 1){
+                        System.out.println(board);
+                    }
+                }catch(PegGameException e){
+                    return true;
+                }
+            }
+        }
         return true;
     }
 
@@ -144,7 +169,8 @@ public class UserInput{
         System.out.println("Available Commands: ");
         System.out.println("help - displays this message");
         System.out.println("move r1 c1 r2 c2 - attempts to move a peg from r1 c1 to r2 c2 on the board.");
-        System.out.println("hint - displays an available move.");
+        System.out.println("hint - displays a move to help you solve.");
         System.out.println("quit - quits the game.");
+        System.out.println("solve - solves the game for you.");
     }
 }
