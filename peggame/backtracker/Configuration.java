@@ -2,6 +2,8 @@ package peggame.backtracker;
 
 import java.util.Collection;
 
+import peggame.Move;
+
 /**
  * The representation of a single configuration for a puzzle.
  * The backtracker.Backtracker depends on these routines in order to
@@ -30,4 +32,6 @@ public interface Configuration {
      * @return true if goal; false otherwise
      */
     public boolean isGoal();
+
+    public Collection<Move> getoptimalMoves();
 }

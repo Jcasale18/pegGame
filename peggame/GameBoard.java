@@ -17,6 +17,7 @@ public class GameBoard implements PegGame{
     private int rows;
     private int cols;
     private int numPegs;
+    private Collection<Move> solvingMoves;
     /**
      * Generates a rows x cols sized PegGame board with no pegs in it
      * @param rows num of rows
@@ -25,10 +26,10 @@ public class GameBoard implements PegGame{
     public GameBoard(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
+        this.solvingMoves = new ArrayList<>();
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
         this.numPegs = 0;
-
         for(int r = 0; r < rows; r++){
             for(int c=0; c <cols; c++){
                 Location location = new Location(r, c);
@@ -51,7 +52,10 @@ public class GameBoard implements PegGame{
     public int getRows(){
         return rows;
     }
-
+    @Override
+    public Collection<Move> getoptimalMoves(){
+        return solvingMoves;
+    }
     @Override
     public int getNumPegs() {
         return this.numPegs;
@@ -82,7 +86,6 @@ public class GameBoard implements PegGame{
 
     @Override
     public void makeMove(Move move) throws PegGameException {
-        Collection<Move> moves = new ArrayList<>();
         Location from = move.getFrom();
         Location to = move.getTo();
 
@@ -100,11 +103,10 @@ public class GameBoard implements PegGame{
             removePeg(from);
             addPeg(to);
             removePeg(middle);
-            moves.add(new Move(from, to));
+            solvingMoves.add(move);
         }
 
         analyzeState();
-        System.out.println(moves);
     }
     public void analyzeState(){
         
@@ -221,7 +223,7 @@ public class GameBoard implements PegGame{
         GameBoard copy = new GameBoard(rows, cols);
         this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));
         copy.numPegs = this.numPegs;
-        
+        copy.solvingMoves = this.solvingMoves;
         return copy;
     }
 

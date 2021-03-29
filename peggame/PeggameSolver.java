@@ -45,7 +45,9 @@ public class PeggameSolver implements Configuration{
             return false;
         }
     }
-
+    public Collection<Move> getoptimalMoves() {
+        return board.getoptimalMoves();
+    }
     @Override
     public boolean isGoal() {
         return (board.getGameState().equals(GameState.WON));
@@ -65,6 +67,7 @@ public class PeggameSolver implements Configuration{
             System.out.println("No solution");
         }else{
             System.out.println(solution);
+            System.out.println(solution.getoptimalMoves());
         }
     }
     
