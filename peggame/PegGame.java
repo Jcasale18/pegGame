@@ -28,5 +28,5 @@ public interface PegGame {
     PegGame deepCopy();
     
     int getNumPegs();
-    Collection<Move> getoptimalMoves();
+    Collection<Move> getsolvingMoves();
 }

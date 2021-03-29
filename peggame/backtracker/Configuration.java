@@ -33,5 +33,5 @@ public interface Configuration {
      */
     public boolean isGoal();
 
-    public Collection<Move> getoptimalMoves();
+    public Collection<Move> getsolution();
 }

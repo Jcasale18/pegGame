@@ -53,7 +53,7 @@ public class GameBoard implements PegGame{
         return rows;
     }
     @Override
-    public Collection<Move> getoptimalMoves(){
+    public Collection<Move> getsolvingMoves(){
         return solvingMoves;
     }
     @Override
@@ -222,8 +222,8 @@ public class GameBoard implements PegGame{
         
         GameBoard copy = new GameBoard(rows, cols);
         this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));
+        this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));
         copy.numPegs = this.numPegs;
-        copy.solvingMoves = this.solvingMoves;
         return copy;
     }
 
