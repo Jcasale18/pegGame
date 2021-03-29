@@ -95,7 +95,7 @@ public class UserInput{
         if(s.equals("help")){
             printCommands();
         }
-        else if (multiple[0].equals("move")){
+        else if (multiple[0].equals("move")){//if first word is "move", process logic to make a move
             int r1 = Integer.parseInt(multiple[1]);
             int c1 = Integer.parseInt(multiple[2]);
             int r2 = Integer.parseInt(multiple[3]);
@@ -115,10 +115,12 @@ public class UserInput{
            
         }
         else if(s.equals("hint")){
+            //manually making a copy without copying moves, so we can pull the first one
             GameBoard copy = new GameBoard(board.getRows(), board.getCols());
             board.getBoard().forEach((loc, bool) -> copy.getBoard().put(loc,bool));
-            copy.setNumPegs(board.getNumPegs());//manually making a copy without copying moves
+            copy.setNumPegs(board.getNumPegs());
 
+            //solve the board
             Backtracker bt = new Backtracker(false);
             Configuration sol = bt.solve(new PeggameSolver(copy));
             if(sol == null){
@@ -134,6 +136,7 @@ public class UserInput{
             board.updateGameState(GameState.NOT_STARTED);
             return false;
         }
+        //make all the moves the solving backtracker algorithm finds
         else if(s.equals("solve")){
             GameBoard copy = new GameBoard(board.getRows(), board.getCols());
 
@@ -148,7 +151,7 @@ public class UserInput{
             }
             Collection<Move> solvingmoves = sol.getsolution();
             for(Move move : solvingmoves){
-                try{
+                try{//catch exception for make move. make each move in list
                     System.out.println(move);
                     board.makeMove(move);
                     if(board.getNumPegs() > 1){

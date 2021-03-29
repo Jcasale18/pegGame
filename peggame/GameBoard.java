@@ -38,7 +38,9 @@ public class GameBoard implements PegGame{
         }
     }
 
-
+    /**
+     * Default board size 4x4
+     */
     public GameBoard(){
         this(4, 4);
     }
@@ -96,7 +98,7 @@ public class GameBoard implements PegGame{
         Location from = move.getFrom();
         Location to = move.getTo();
 
-        Location middle = new Location((to.getRow() + from.getRow())/2 , (to.getCol() + from.getCol()) / 2);
+        Location middle = new Location((to.getRow() + from.getRow())/2 , (to.getCol() + from.getCol()) / 2);//location that's jumped over can be thought of as average row/col
 
         if(!board.containsKey(from) || !board.containsKey(to)){ //Checks if move is in board
             throw new PegGameException("Invalid move");
@@ -193,7 +195,7 @@ public class GameBoard implements PegGame{
         for(Location hole: holes){
             holelist.add(hole);
         }
-        holelist.sort( (a,b) -> (a.hashCode() - b.hashCode()));
+        holelist.sort( (a,b) -> (a.hashCode() - b.hashCode()));//sorting because hash is not ordered
 
 
         int index = 0;        
@@ -226,8 +228,8 @@ public class GameBoard implements PegGame{
     public PegGame deepCopy() {
         
         GameBoard copy = new GameBoard(rows, cols);
-        this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));
-        this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));
+        this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));//for each location in board, put it in copy board
+        this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));//copy list, since list is also passed by reference
         copy.numPegs = this.numPegs;
         return copy;
     }

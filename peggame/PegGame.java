@@ -27,6 +27,14 @@ public interface PegGame {
      */
     PegGame deepCopy();
     
+    /**
+     * Make a deep copy of a PegGame
+     * @return PegGame
+     */
     int getNumPegs();
+    /**
+     * Return list of moves that led to current configuration
+     * @return Collection of moves
+     */
     Collection<Move> getsolvingMoves();
 }

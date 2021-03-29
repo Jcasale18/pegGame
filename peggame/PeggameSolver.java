@@ -19,6 +19,7 @@ public class PeggameSolver implements Configuration{
     public Collection<Configuration> getSuccessors() {
         Collection<Configuration> successors = new ArrayList<>();
         
+        //for each possible move, make that move, and save the result as a board
         for(Move move : moves){
             PegGame copy = board.deepCopy();
             //int test = copy.getNumPegs();
@@ -46,11 +47,11 @@ public class PeggameSolver implements Configuration{
         }
     }
     public Collection<Move> getsolution() {
-        return board.getsolvingMoves();
+        return board.getsolvingMoves();//returns moves that have been made on board; when called on solved board, it will be solving moves.
     }
     @Override
     public boolean isGoal() {
-        return (board.getNumPegs() == 1);
+        return (board.getNumPegs() == 1);//when there's only 1 peg left, it's solved.
     }
 
     @Override
@@ -60,7 +61,7 @@ public class PeggameSolver implements Configuration{
     public static void main(String[] args) {
         Backtracker solver = new Backtracker(false);
         UserInput u = new UserInput();
-        u.initiateboard("data/3_3.txt");
+        u.initiateboard("data/5_5.txt");//manual test for this solve should result in a solution
         Configuration config = new PeggameSolver(u.getBoard());
         Configuration solution = solver.solve(config);
         if(solution == null){
