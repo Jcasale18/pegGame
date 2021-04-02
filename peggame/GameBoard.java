@@ -37,7 +37,23 @@ public class GameBoard implements PegGame{
             }
         }
     }
-
+    public GameBoard(int height){
+        this.rows = height;
+        this.cols = height;
+        int current_width = 1;
+        this.solvingMoves = new ArrayList<>();
+        this.board = new HashMap<>();
+        this.state = GameState.NOT_STARTED;
+        this.numPegs = 0;
+        for(int r = 0; r < height; r++){
+            for(int c=0; c <current_width; c++){
+                Location location = new Location(r, c);
+                this.board.put(location, false);
+            }
+            current_width++;
+        }
+    }      
+    
     /**
      * Default board size 4x4
      */
@@ -202,6 +218,8 @@ public class GameBoard implements PegGame{
         int index = 0;        
         String string = "";
         for(Location hole: holelist){
+            System.out.println(hole);
+            /*
             if(board.get(hole) == true){
                 string += "o";
             }
@@ -213,6 +231,7 @@ public class GameBoard implements PegGame{
 
                 string += "\n";
             }
+            */
         }
         return string;
     }
@@ -234,6 +253,9 @@ public class GameBoard implements PegGame{
         copy.numPegs = this.numPegs;
         return copy;
     }
-
+public static void main(String[] args) {
+    PegGame board = new GameBoard(5);
+    System.out.println(board);
+}
     
 }
