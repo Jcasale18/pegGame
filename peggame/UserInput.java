@@ -14,8 +14,8 @@ public class UserInput{
     /**
      * Constructor for extant board
      */
-    private GameBoard board;
-    public UserInput(GameBoard board){
+    private PegGame board;
+    public UserInput(PegGame board){
         this.board = board;//the board for the userinput class to manipulate
     }
 
@@ -31,7 +31,7 @@ public class UserInput{
      * Getter for userinput board
      * @return Returns the userinput gameboard
      */
-    public GameBoard getBoard() {
+    public PegGame getBoard() {
         return board;
     }
 

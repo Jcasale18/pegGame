@@ -1,6 +1,7 @@
 package peggame;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface PegGame {
     /**
@@ -51,4 +52,6 @@ public interface PegGame {
     int getCols();
 
     int getRows();
+
+    Map<Location, Boolean> getBoard();
 }

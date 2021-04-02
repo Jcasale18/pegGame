@@ -20,7 +20,7 @@ public class Project1Main {
         String filename = scan.nextLine();//Checks for filename, throws exceptions if file name does not exist
         
         inputparser.initiateboard(filename);//inputparser contains the board, knows to manipulate that board
-        GameBoard board = inputparser.getBoard();
+        PegGame board = inputparser.getBoard();
 
 
         

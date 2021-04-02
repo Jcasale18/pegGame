@@ -97,7 +97,6 @@ public class GameBoard implements PegGame{
     public void makeMove(Move move) throws PegGameException {
         Location from = move.getFrom();
         Location to = move.getTo();
-        int total_distance = Math.abs(to.getCol() - cols) + Math.abs(to.getRow() - rows);//adding differences in rows and columns finds total number of pegs between two locations
         Location middle = new Location((to.getRow() + from.getRow())/2 , (to.getCol() + from.getCol()) / 2);//location that's jumped over can be thought of as average row/col
 
         if(!board.containsKey(from) || !board.containsKey(to)){ //Checks if move is in board
@@ -108,7 +107,7 @@ public class GameBoard implements PegGame{
             throw new PegGameException("There is already a peg there");
         }else if(!hasPeg(middle)){
             throw new PegGameException("There is no peg to jump over");
-        }else if(total_distance != 2){
+        }else if((Math.abs(to.getCol()-from.getCol())!=2) && (Math.abs(to.getRow()-from.getRow())!=2)){
             throw new PegGameException("Can only jump over one peg.");
         }else{
             removePeg(from);
