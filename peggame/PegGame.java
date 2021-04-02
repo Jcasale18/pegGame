@@ -37,4 +37,18 @@ public interface PegGame {
      * @return Collection of moves
      */
     Collection<Move> getsolvingMoves();
+
+    void addPeg(Location to);
+
+    void removePeg(Location from);
+
+    boolean hasPeg(Location location);
+
+    void updateGameState(GameState state);
+
+    void analyzeState();
+
+    int getCols();
+
+    int getRows();
 }
