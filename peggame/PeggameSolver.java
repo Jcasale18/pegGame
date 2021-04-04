@@ -61,7 +61,7 @@ public class PeggameSolver implements Configuration{
     public static void main(String[] args) {
         Backtracker solver = new Backtracker(false);
         UserInput u = new UserInput();
-        u.initiateboard("data/5_5.txt");//manual test for this solve should result in a solution
+        u.initiateboard("data/7_7.txt");//manual test for this solve should result in a solution
         Configuration config = new PeggameSolver(u.getBoard());
         Configuration solution = solver.solve(config);
         if(solution == null){

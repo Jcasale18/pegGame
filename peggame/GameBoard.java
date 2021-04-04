@@ -217,8 +217,19 @@ public class GameBoard implements PegGame{
 
         int index = 0;        
         String string = "";
-        for(Location hole: holelist){
-            System.out.println(hole);
+        //for(Location hole: holelist){
+            for(int i=0; i<rows;i++){
+                for(int j=0; j<cols;j++){
+                    if(board.containsKey(new Location(i,j))){
+                        if (board.get(new Location (i,j))){
+                            string+="o";
+                        } else{
+                            string+="-";
+                        }
+                    }
+                }
+                string+="\n";
+            }
             /*
             if(board.get(hole) == true){
                 string += "o";
@@ -232,7 +243,7 @@ public class GameBoard implements PegGame{
                 string += "\n";
             }
             */
-        }
+        //}
         return string;
     }
     /**

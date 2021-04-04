@@ -47,6 +47,7 @@ public class UserInput{
     public void initiateboard(String filename){
         //use the filename to add pegs to the board corresponding to file contents.
         //maybe return a tostring of the new board.(good for testing/debugging etc)
+
         GameBoard board = null;
         try(
             FileReader file = new FileReader(filename);
@@ -56,8 +57,16 @@ public class UserInput{
             int row = Integer.parseInt(rowString);
             String line = reader.readLine();
             int col = line.length();
-            board = new GameBoard(row, col);
+            reader.mark(col*2);
+            String second = reader.readLine();
+            int sec = second.length();
+            if(sec-col==1){
+                board = new GameBoard(row);
+            } else{
+                board = new GameBoard(row, col);
+            }
 
+            reader.reset();
             int countRow = 0;
             while (true){
                 if (line == null){
