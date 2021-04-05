@@ -11,12 +11,17 @@ import java.util.Set;
  * Class represents a game of Peg Game
  */
 public class GameBoard implements PegGame{
+    public enum BoardType{
+        RECTANGLE,
+        TRIANGLE;
+    }
 
     private Map<Location, Boolean> board;//Map of all locations in board {Location, HasPeg?}
     private GameState state;
     private int rows;
     private int cols;
     private int numPegs;
+    private BoardType shape;
     private Collection<Move> solvingMoves;
     /**
      * Generates a rows x cols sized PegGame board with no pegs in it
@@ -30,6 +35,7 @@ public class GameBoard implements PegGame{
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
         this.numPegs = 0;
+        this.shape = BoardType.RECTANGLE;
         for(int r = 0; r < rows; r++){
             for(int c=0; c <cols; c++){
                 Location location = new Location(r, c);
@@ -45,6 +51,7 @@ public class GameBoard implements PegGame{
         this.board = new HashMap<>();
         this.state = GameState.NOT_STARTED;
         this.numPegs = 0;
+        this.shape = BoardType.TRIANGLE;
         for(int r = 0; r < height; r++){
             for(int c=0; c <current_width; c++){
                 Location location = new Location(r, c);
@@ -207,20 +214,17 @@ public class GameBoard implements PegGame{
     
     @Override
     public String toString(){
-        Set<Location> holes= board.keySet();
-        List<Location> holelist = new ArrayList<>();
-        for(Location hole: holes){
-            holelist.add(hole);
-        }
-        holelist.sort( (a,b) -> (a.hashCode() - b.hashCode()));//sorting because hash is not ordered
-
-
-        int index = 0;        
         String string = "";
-        //for(Location hole: holelist){
+
             for(int i=0; i<rows;i++){
+                if (shape == BoardType.TRIANGLE){
+                    for(int p=rows-i;p>0;p--){
+                        string += " ";
+                    }
+                }
                 for(int j=0; j<cols;j++){
                     if(board.containsKey(new Location(i,j))){
+                        string += " ";
                         if (board.get(new Location (i,j))){
                             string+="o";
                         } else{
@@ -230,20 +234,6 @@ public class GameBoard implements PegGame{
                 }
                 string+="\n";
             }
-            /*
-            if(board.get(hole) == true){
-                string += "o";
-            }
-            else{
-                string += "-";
-            }
-            index ++;
-            if(index % cols == 0){
-
-                string += "\n";
-            }
-            */
-        //}
         return string;
     }
     /**
@@ -257,12 +247,23 @@ public class GameBoard implements PegGame{
 
     @Override
     public PegGame deepCopy() {
-        
-        GameBoard copy = new GameBoard(rows, cols);
+        if(shape == BoardType.RECTANGLE){
+            GameBoard copy = new GameBoard(rows, cols);
+            this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));//for each location in board, put it in copy board
+            this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));//copy list, since list is also passed by reference
+            copy.numPegs = this.numPegs;
+            copy.shape = this.shape;
+            return copy;
+        }
+        GameBoard copy = new GameBoard(rows);
         this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));//for each location in board, put it in copy board
         this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));//copy list, since list is also passed by reference
         copy.numPegs = this.numPegs;
+        copy.shape = this.shape;
         return copy;
+    }
+    public BoardType getShape() {
+        return shape;
     }
 public static void main(String[] args) {
     PegGame board = new GameBoard(5);
