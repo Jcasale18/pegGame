@@ -214,47 +214,25 @@ public class GameBoard implements PegGame{
     
     @Override
     public String toString(){
-        Set<Location> holes= board.keySet();
-        List<Location> holelist = new ArrayList<>();
-        for(Location hole: holes){
-            holelist.add(hole);
-        }
-        holelist.sort( (a,b) -> (a.hashCode() - b.hashCode()));//sorting because hash is not ordered
-
-
-        int index = 0;        
         String string = "";
-        //for(Location hole: holelist){
             for(int i=0; i<rows;i++){
+                if (shape == BoardType.TRIANGLE){
+                    for(int p=rows-i;p>0;p--){
+                        string += " ";
+                    }
+                }
                 for(int j=0; j<cols;j++){
                     if(board.containsKey(new Location(i,j))){
                         string += " ";
                         if (board.get(new Location (i,j))){
-                            string+="o ";
+                            string+="o";
                         } else{
-                            string+="- ";
+                            string+="-";
                         }
-                    }else{
-                        //
-
                     }
                 }
                 string+="\n";
             }
-            /*
-            if(board.get(hole) == true){
-                string += "o";
-            }
-            else{
-                string += "-";
-            }
-            index ++;
-            if(index % cols == 0){
-
-                string += "\n";
-            }
-            */
-        //}
         return string;
     }
     /**
