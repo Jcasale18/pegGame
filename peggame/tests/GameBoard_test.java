@@ -17,18 +17,18 @@ public class GameBoard_test {
     public void test_game_board_default(){
         GameBoard board = new GameBoard();
 
-        assert(board.toString().equals("----\n----\n----\n----\n"));
+        assert(board.toString().equals(" - - - -\n - - - -\n - - - -\n - - - -\n"));
         assert(board.getGameState() == GameState.NOT_STARTED);
         assert(board.getPossibleMoves().size() == 0);
     }
     @Test
     public void test_addPeg(){
         GameBoard board = new GameBoard(2,2);
-        assert("--\n--\n".equals(board.toString()));
+        assert(" - -\n - -\n".equals(board.toString()));
         board.addPeg(new Location(0, 0));
-        assert("o-\n--\n".equals(board.toString()));
+        assert(" o -\n - -\n".equals(board.toString()));
         board.addPeg(new Location(1, 1));
-        assert("o-\n-o\n".equals(board.toString()));
+        assert(" o -\n - o\n".equals(board.toString()));
         assert(board.getPossibleMoves().size() == 0);
 
     }
@@ -74,9 +74,9 @@ public class GameBoard_test {
         GameBoard board = new GameBoard(2,2);
         board.addPeg(new Location(0, 0));
         board.addPeg(new Location(1, 1));
-        assert("o-\n-o\n".equals(board.toString()));
+        assert(" o -\n - o\n".equals(board.toString()));
         board.removePeg(new Location(1, 1));
-        assert("o-\n--\n".equals(board.toString()));
+        assert(" o -\n - -\n".equals(board.toString()));
 
         assert(board.getPossibleMoves().size() == 0);
     }
