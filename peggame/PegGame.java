@@ -3,6 +3,8 @@ package peggame;
 import java.util.Collection;
 import java.util.Map;
 
+import peggame.GameBoard.BoardType;
+
 public interface PegGame {
     /**
      * Find all moves on a board.
@@ -54,4 +56,6 @@ public interface PegGame {
     int getRows();
 
     Map<Location, Boolean> getBoard();
+
+    BoardType getShape();
 }

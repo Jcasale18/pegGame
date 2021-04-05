@@ -215,7 +215,6 @@ public class GameBoard implements PegGame{
     @Override
     public String toString(){
         String string = "";
-
             for(int i=0; i<rows;i++){
                 if (shape == BoardType.TRIANGLE){
                     for(int p=rows-i;p>0;p--){
