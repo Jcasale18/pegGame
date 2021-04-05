@@ -228,11 +228,15 @@ public class GameBoard implements PegGame{
             for(int i=0; i<rows;i++){
                 for(int j=0; j<cols;j++){
                     if(board.containsKey(new Location(i,j))){
+                        string += " ";
                         if (board.get(new Location (i,j))){
-                            string+="o";
+                            string+="o ";
                         } else{
-                            string+="-";
+                            string+="- ";
                         }
+                    }else{
+                        string-= " ";
+
                     }
                 }
                 string+="\n";
@@ -269,13 +273,18 @@ public class GameBoard implements PegGame{
             this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));//for each location in board, put it in copy board
             this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));//copy list, since list is also passed by reference
             copy.numPegs = this.numPegs;
+            copy.shape = this.shape;
             return copy;
         }
         GameBoard copy = new GameBoard(rows);
         this.board.forEach((loc, bool) -> copy.getBoard().put(loc,bool));//for each location in board, put it in copy board
         this.solvingMoves.forEach((move) -> copy.getsolvingMoves().add(move));//copy list, since list is also passed by reference
         copy.numPegs = this.numPegs;
+        copy.shape = this.shape;
         return copy;
+    }
+    public BoardType getShape() {
+        return shape;
     }
 public static void main(String[] args) {
     PegGame board = new GameBoard(5);

@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.crypto.BadPaddingException;
+
+import peggame.GameBoard.BoardType;
 import peggame.backtracker.Backtracker;
 import peggame.backtracker.Configuration;
 
@@ -147,8 +150,11 @@ public class UserInput{
         }
         //make all the moves the solving backtracker algorithm finds
         else if(s.equals("solve")){
-            GameBoard copy = new GameBoard(board.getRows(), board.getCols());
-
+            GameBoard[] ref = {new GameBoard(board.getCols())};
+            if(board.getShape() == BoardType.RECTANGLE){
+                ref[0] = new GameBoard(board.getRows(), board.getCols());
+            }
+            GameBoard copy = ref[0];
             board.getBoard().forEach((loc, bool) -> copy.getBoard().put(loc,bool));
             copy.setNumPegs(board.getNumPegs());//manually making a copy without copying moves
 
