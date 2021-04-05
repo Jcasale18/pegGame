@@ -128,7 +128,11 @@ public class UserInput{
         }
         else if(s.equals("hint")){
             //manually making a copy without copying moves, so we can pull the first one
-            GameBoard copy = new GameBoard(board.getRows(), board.getCols());
+            GameBoard[] ref = {new GameBoard(board.getCols())};
+            if(board.getShape() == BoardType.RECTANGLE){
+                ref[0] = new GameBoard(board.getRows(), board.getCols());
+            }
+            GameBoard copy = ref[0];
             board.getBoard().forEach((loc, bool) -> copy.getBoard().put(loc,bool));
             copy.setNumPegs(board.getNumPegs());
 
