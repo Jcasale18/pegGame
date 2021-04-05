@@ -235,7 +235,7 @@ public class GameBoard implements PegGame{
                             string+="- ";
                         }
                     }else{
-                        string-= " ";
+                        //
 
                     }
                 }
